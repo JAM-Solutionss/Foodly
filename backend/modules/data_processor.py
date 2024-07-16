@@ -1,7 +1,7 @@
 from calendar import day_abbr
 import pandas as pd
 import openfoodfacts
-import product_filters
+from product_filters import *
 
 def filter_product(product: dict, product_filters: list) -> dict:
     """Filters product based on the provided "product_filters" dict.
@@ -51,7 +51,6 @@ def product_data_dataframe(product: dict, data_key: str) -> pd.DataFrame:
     """
     dataframe = pd.DataFrame()
     for key, value in product[data_key].items():
-        print(key, value)
         dataframe[key] = [value]
     return dataframe
 
@@ -77,11 +76,15 @@ def product(response, index: int = 0) -> dict:
 
 
 if __name__ == '__main__':
+    # Some example usage
+    
+    # Getting API response
     api = openfoodfacts.API(user_agent="MyAwesomeApp/1.0")
     code = "3017620422003"
     resp_text = api.product.text_search('Nutella')
     resp_code = api.product.get(code)
     
+    # Printing all keys
     for key in resp_text.keys():
         print(f'resp_text_keys: {key}')
 
@@ -89,15 +92,23 @@ if __name__ == '__main__':
         print(f'resp_code_keys: {key}')
 
     
-    
+    # Extract a single product
     single_product = product(resp_code)
     single_product_copy = single_product.copy()
+    
+    # Inspecting all data keys
     single_product_copy_keys = list(single_product_copy.keys())
     print(single_product_copy_keys)
 
+    # Filter product based an filters in product_filters
     single_product_copy_filtered = filter_product(single_product_copy, default_filters)
+    
+    # Getting nutriments as dictionary and DataFrame
     nutriments = product_data(single_product_copy_filtered, 'nutriments')
     nutriments_Dataframe = product_data_dataframe(single_product_copy_filtered, 'nutriments')
+    
+    print(f'{nutriments}\n\n')
+    print(f'{nutriments_Dataframe}\n\n')
 
 
 

@@ -12,7 +12,7 @@ default_filters = {
 }
 
 # Another filters
-anoother_filters = {
+other_filters = {
     'nutriments': [
         'carbohydrates_100g',
         'carbohydrates_unit'
