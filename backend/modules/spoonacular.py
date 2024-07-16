@@ -81,6 +81,21 @@ def get_recipes(ingredients, ingredient_number=1, max_calories=800, min_protein=
 
             return processed_recipes
 
+            # Output for streamlit
+            streamlit_output = []
+            for recipe in processed_recipes:
+                recipe_data = {
+                    "rname": recipe['RecipeName'],
+                    "image_url": recipe['ImageURL'],
+                    "ingredients": [
+                        f"{ingredient['Name']}: {ingredient['Amount']} {ingredient['Unit']} ({ingredient['Original']})"
+                        for ingredient in recipe['Ingredients']
+                    ]
+                }
+                streamlit_output.append(recipe_data)
+            print(streamlit_output)
+            return streamlit_output
+            
         else:
             print(f'Error in request. Status code: {response.status_code}')
             return None
@@ -91,9 +106,9 @@ def get_recipes(ingredients, ingredient_number=1, max_calories=800, min_protein=
 
 
 ingredients_list = ['chicken', 'rice', 'broccoli']
-
-recipes_list = get_recipes(ingredients_list)
-if recipes_list:
-    print(recipes_list)
-else:
-    print("No recipes found or an error occurred.")
+if __name__ == '__main__':
+    recipes_list = get_recipes(ingredients_list)
+    if recipes_list:
+        print(recipes_list)
+    else:
+        print("No recipes found or an error occurred.")

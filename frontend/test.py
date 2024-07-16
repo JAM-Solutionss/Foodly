@@ -26,8 +26,14 @@ food_data = st.Page(
     icon=":material/database:"
 )
 
+analysis = st.Page(
+    "webpages/analysis.py",
+    title="Recipe Analysis",
+    icon=":material/database:"
+)
+
 # Navigation
-pg = st.navigation({"Home": [home], "About": [about], "Food Data": [food_data]})
+pg = st.navigation({"Menu": [home, about, food_data], "Analysis": [analysis]})
 
 pg.run()
 
