@@ -4,19 +4,19 @@ from dotenv import load_dotenv
 load_dotenv()
 
 def get_recipes(ingredients, ingredient_number=1, max_calories=800, min_protein=0, max_ready_time=1000, servings=2, number=10, ranking=1, ignore_pantry=True):
-    ingredients_str = ','.join(ingredients)
-    
+    ingredients_str = ','.join(ingredients) # combines all ingredients in one string
+  
     url = 'https://api.spoonacular.com/recipes/findByIngredients'
     api_key = os.getenv('SPOONACULAR_API_KEY')
 
     params = {
         'apiKey': api_key,
-        'ingredients': ingredients_str,
-        'ingredientsNumber': ingredient_number,
-        'servings': servings,
-        'maxCalories': max_calories,
-        'minProtein': min_protein,
-        'maxReadTime': max_ready_time,
+        'ingredients': ingredients_str, # all ingredients
+        'ingredientsNumber': ingredient_number, # number of ingredients
+        'servings': servings, # number of servings
+        'maxCalories': max_calories, # max amount of calories
+        'minProtein': min_protein, # min amount of protein
+        'maxReadyTime': max_ready_time, # max time to cook
         'number': number,  # Number of recipes to retrieve
         'ranking': ranking,  # 1 = popularity, 2 = healthier
         'ignorePantry': ignore_pantry  # True = only our ingredients, False = allow other ingredients
