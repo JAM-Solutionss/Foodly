@@ -1,6 +1,7 @@
 import pandas as pd
 import openfoodfacts
 from product_filters import *
+from name_mappings import *
 
 
 
@@ -71,13 +72,13 @@ def nutriments_dataframe(product: dict) -> pd.DataFrame:
         if key.endswith('_unit'):
             units.append(value)
         else:
-            parameters.append(key)
+            parameters.append(key.replace('_100g', '').replace('_', ' ').capitalize())
             values.append(value)
             
     nutriments_df = pd.DataFrame({
         'Nutriment': parameters,
-        'Unit': units,
-        'Value': values
+        'Value': values,
+        'Unit': units
     })
     
     return nutriments_df
