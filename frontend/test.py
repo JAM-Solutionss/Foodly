@@ -33,7 +33,7 @@ analysis = st.Page(
 )
 
 # Navigation
-pg = st.navigation({"Home": [home], "About": [about], "Food Data": [food_data], "Analysis": [analysis]})
+pg = st.navigation({"Menu": [home, about, food_data], "Analysis": [analysis]})
 
 pg.run()
 
