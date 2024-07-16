@@ -4,7 +4,7 @@ def get_recipes(ingredients, number=10, ranking=1, ignore_pantry=True):
     ingredients_str = ','.join(ingredients)
     
     url = 'https://api.spoonacular.com/recipes/findByIngredients'
-    api_key = 'bb68c5d022d646e893196a5080899a08'
+    api_key = ''
 
     params = {
         'apiKey': api_key,
@@ -31,7 +31,6 @@ def get_recipes(ingredients, number=10, ranking=1, ignore_pantry=True):
     except requests.exceptions.RequestException as e:
         print(f"Fehler bei der Anfrage: {e}")
 
-api_key = 'dein_api_schluessel'
 
 ingredients_list = ['chicken', 'rice', 'broccoli']
 
