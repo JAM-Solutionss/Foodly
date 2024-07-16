@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 def get_recipes(ingredients, ingredient_number=1, max_calories=800, min_protein=0, max_ready_time=1000, servings=2, number=10, ranking=1, ignore_pantry=True):
-    ingredients_str = ','.join(ingredients) # combines all ingredients in one string
+    ingredients_str = ','.join(ingredients) # combines all ingredients into one string
   
     url = 'https://api.spoonacular.com/recipes/findByIngredients'
     api_key = os.getenv('SPOONACULAR_API_KEY')
@@ -34,6 +34,9 @@ def get_recipes(ingredients, ingredient_number=1, max_calories=800, min_protein=
             for recipe in recipes:
                 recipe_name = recipe.get('title', 'No title available')
                 image_url = recipe.get('image', 'No image available')
+                calories = recipe.get('calories', 'N/A') # extract calories
+                protein = recipe.get('protein', 'N/A') # extract protein
+                fat = recipe.get('fat', 'N/A') # extract fat
                 
                 missed_ingredients = recipe.get('missedIngredients', [])
                 
@@ -42,6 +45,9 @@ def get_recipes(ingredients, ingredient_number=1, max_calories=800, min_protein=
                 recipe_dict = {
                     'RecipeName': recipe_name,
                     'ImageURL': image_url,
+                    'Calories': calories,
+                    'Protein': protein,
+                    'Fat': fat,
                     'Ingredients': []
                 }
 
@@ -62,24 +68,32 @@ def get_recipes(ingredients, ingredient_number=1, max_calories=800, min_protein=
 
                 processed_recipes.append(recipe_dict)
 
-            for recipe in recipes:
+            for recipe in processed_recipes:
                 print(f"Recipe Name: {recipe['RecipeName']}")
                 print(f"Image URL: {recipe['ImageURL']}")
+                print(f"Calories: {recipe['Calories']}")
+                print(f"Protein: {recipe['Protein']}")
+                print(f"Fat: {recipe['Fat']}")
                 print("Ingredients:")
                 for ingredient in recipe['Ingredients']:
                     print(f"  - {ingredient['Name']}: {ingredient['Amount']} {ingredient['Unit']}")
                 print("-----------------------")
 
-            print(recipe_dict)
+            return processed_recipes
 
         else:
             print(f'Error in request. Status code: {response.status_code}')
+            return None
             
     except requests.exceptions.RequestException as e:
         print(f'Error in request: {e}')
+        return None
 
 
 ingredients_list = ['chicken', 'rice', 'broccoli']
 
-list = get_recipes(ingredients_list)
-print(list)
+recipes_list = get_recipes(ingredients_list)
+if recipes_list:
+    print(recipes_list)
+else:
+    print("No recipes found or an error occurred.")
