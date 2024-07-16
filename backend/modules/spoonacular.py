@@ -1,10 +1,14 @@
 import requests
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
 def get_recipes(ingredients, number=10, ranking=1, ignore_pantry=True):
     ingredients_str = ','.join(ingredients)
     
     url = 'https://api.spoonacular.com/recipes/findByIngredients'
-    api_key = ''
+    api_key = os.getenv('SPOONACULAR_API_KEY')
+    #print(api_key)
 
     params = {
         'apiKey': api_key,
