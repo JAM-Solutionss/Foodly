@@ -1,15 +1,6 @@
+from calendar import day_abbr
 import pandas as pd
 import openfoodfacts
-
-api = openfoodfacts.API(user_agent="MyAwesomeApp/1.0")
-code = "3017620422003"
-resp_text = api.product.text_search('Nutella')
-resp_code = api.product.get(code)
-for key in resp_text.keys():
-    print(f'resp_text_keys: {key}')
-
-for key in resp_code.keys():
-    print(f'resp_code_keys: {key}')
 
 default_filters = {
     'nutriments': [
@@ -23,7 +14,6 @@ default_filters = {
         'sugars_unit'        
     ]
 }
-
 
 
 def filter_product(product: dict, product_filters: list) -> dict:
@@ -41,14 +31,16 @@ def filter_product(product: dict, product_filters: list) -> dict:
         product_copy[data] = data_filtered
     
     return product_copy
-    
+ 
+def product_data(product: dict, data_name: str) -> dict:
+    return product[data_name]   
 
-def nutriments(product: dict) -> dict:
-    return product['nutriments']
-
-def nutriments_dataframe(product: dict) -> pd.DataFrame:
-    nutrition_data = pd.DataFrame.from_dict(product['nutriments'])
-    return nutrition_data
+def product_data_dataframe(product: dict, data_name: str) -> pd.DataFrame:
+    dataframe = pd.DataFrame()
+    for key, value in product[data_name].items():
+        print(key, value)
+        dataframe[key] = [value]
+    return dataframe
 
 def product(response, index: int = 0) -> dict:
     
@@ -61,17 +53,28 @@ def product(response, index: int = 0) -> dict:
 
 
 
+if __name__ == '__main__':
+    api = openfoodfacts.API(user_agent="MyAwesomeApp/1.0")
+    code = "3017620422003"
+    resp_text = api.product.text_search('Nutella')
+    resp_code = api.product.get(code)
+    
+    for key in resp_text.keys():
+        print(f'resp_text_keys: {key}')
 
-single_product = product(resp_code)
-single_product_keys = list(single_product.keys())
-single_product_copy = single_product.copy()
-print(list(single_product_copy['nutriments'].keys()))
+    for key in resp_code.keys():
+        print(f'resp_code_keys: {key}')
 
-single_product_copy_filtered = filter_product(single_product_copy, default_filters)
-nutriments_data = nutriments(single_product_copy)
+    
+    
+    single_product = product(resp_code)
+    single_product_copy = single_product.copy()
+    single_product_copy_keys = list(single_product_copy.keys())
+    print(single_product_copy_keys)
 
-product_filtered = filter_product(single_product_copy, default_filters)
-product_filtered['nutriments']
+    single_product_copy_filtered = filter_product(single_product_copy, default_filters)
+    nutriments = product_data(single_product_copy_filtered, 'nutriments')
+    nutriments_Dataframe = product_data_dataframe(single_product_copy_filtered, 'nutriments')
 
 
 
