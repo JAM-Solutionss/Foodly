@@ -1,20 +1,7 @@
 from calendar import day_abbr
 import pandas as pd
 import openfoodfacts
-
-default_filters = {
-    'nutriments': [
-        'carbohydrates_100g',
-        'carbohydrates_unit'
-        'energy-kcal_100g',
-        'energy-kcal_unit',
-        'fat_100g',
-        'fat_unit',
-        'sugars_100g',
-        'sugars_unit'        
-    ]
-}
-
+import product_filters
 
 def filter_product(product: dict, product_filters: list) -> dict:
     
