@@ -21,6 +21,13 @@ st.button("Generate Food", on_click=lambda: generate_meal())
 
 def get_recipes_from_backend():
     ingredients = FoodGPT().food_items.keys()
-    get_recipes(ingredients)
+    recipes = get_recipes(ingredients)
+    for recipe in recipes:
+        st.header(recipe['name'])
+        st.image(recipe['image_url'])
+        st.subheader("Ingredients:")
+        for ingredient in recipe['ingredients']:
+            st.write(ingredient)
+        st.markdown("---")
 
 st.button("Get Recipes", on_click=lambda: get_recipes_from_backend())
