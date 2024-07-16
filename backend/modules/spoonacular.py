@@ -69,6 +69,8 @@ def get_recipes(ingredients, number=10, ranking=1, ignore_pantry=True):
                 print("-----------------------")
 
             print(recipe_dict)
+
+            # Output for streamlit
             streamlit_output = []
             for recipe in processed_recipes:
                 recipe_data = {
@@ -80,7 +82,8 @@ def get_recipes(ingredients, number=10, ranking=1, ignore_pantry=True):
                     ]
                 }
                 streamlit_output.append(recipe_data)
-            return streamlit_output     
+            return streamlit_output
+            
         else:
             print(f'Error in request. Status code: {response.status_code}')
             

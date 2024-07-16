@@ -1,9 +1,11 @@
 [theme]
-base="dark"
-primaryColor="#f9c0f3"
-backgroundColor="#af5baf"
-secondaryBackgroundColor="#f5d5f7"
+primaryColor="#ffd8fb"
+backgroundColor="#fbe1fb"
+secondaryBackgroundColor="#ac78b7"
+textColor="#373636"
 font="monospace"
+
+
 
 [server]
 enableStaticServing = true
