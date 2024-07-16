@@ -1,6 +1,6 @@
 nutriments_filters = [
     'carbohydrates_100g',
-    'carbohydrates_unit'
+    'carbohydrates_unit',
     'energy-kcal_100g',
     'energy-kcal_unit',
     'fat_100g',
