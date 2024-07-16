@@ -1,9 +1,6 @@
 import pandas as pd
 import openfoodfacts
 from product_filters import *
-from name_mappings import *
-
-
 
 def filter_nutriments(product: dict, nutriments_filters: list) -> dict:
     """Filters product nutriments based on the provided "nutriments_filters" list.
@@ -83,18 +80,30 @@ def nutriments_dataframe(product: dict) -> pd.DataFrame:
     
     return nutriments_df
 
-def nutriscore(product: dict) -> tuple[str,int]:
-    """Returns the nutriscore grade ('a' to 'e') and score (1 to 5) as tuple.
+def nutriscore(product: dict) -> int:
+    """Returns the nutriscore integer.
 
     Args:
         product (dict): Single producct dictionary.
 
     Returns:
-        tuple[str,int]: Tuple of nutriscore grade ('a' to 'e') and score (1 to 5).
+        tuple[str,int]: Integer nutriscore.
+    """
+    nutriscore_score = product_data(product, "nutriscore_score")
+    return nutriscore_score
+
+def nutrigrade(product: dict) -> str:
+    """Returns the nutrigrade ('a' to 'e') as string.
+
+    Args:
+        product (dict): Single producct dictionary.
+
+    Returns:
+        tuple[str,int]: String nutrigrage.
     """
     nutriscore_grade = product_data(product, "nutriscore_grade")
-    nutriscore_score = product_data(product, "nutriscore_score")
-    return nutriscore_grade, nutriscore_score
+    return nutriscore_grade
+
 
 
 def product(response, index: int = 0) -> dict:
@@ -153,7 +162,8 @@ if __name__ == '__main__':
     print(f'{nutriments_Dataframe}\n\n')
     
     # Getting nutriscore grade and score
-    nutriscore_grade, nutriscore_score = nutriscore(single_product_copy_filtered)
+    nutriscore_grade = nutrigrade(single_product_copy_filtered)
+    nutriscore_score = nutriscore(single_product_copy_filtered)
     
     print(f'Nutriscore grade: {nutriscore_grade}\nNutriscore score: {nutriscore_score}')
 
