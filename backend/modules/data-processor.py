@@ -11,30 +11,44 @@ for key in resp_text.keys():
 for key in resp_code.keys():
     print(f'resp_code_keys: {key}')
 
-default_nutriments = [
-    'carbohydrates_100g',
-    'energy-kcal_100g',
-    'fat_100g',
-    'sugars_100g',
-    
-]
+default_filters = {
+    'nutriments': [
+        'carbohydrates_100g',
+        'carbohydrates_unit'
+        'energy-kcal_100g',
+        'energy-kcal_unit',
+        'fat_100g',
+        'fat_unit',
+        'sugars_100g',
+        'sugars_unit'        
+    ]
+}
 
-def filter_product(product: dict, data_name: str, filters: list):
-    data = product[data_name]
-    for filter in filters:
-        data_filtered = {key: value for key, value in data.items() if filter in key}
-        product[data_name] = data_filtered
+
+
+def filter_product(product: dict, product_filters: list) -> dict:
     
-    return product
+    product_copy = product.copy()
+    data_filtered = {}
+    
+    for data, filters in product_filters.items():
+    
+        for filter in filters:
+            for key, value in product[data].items():
+                if filter == key:
+                    data_filtered[key] = value
+                
+        product_copy[data] = data_filtered
+    
+    return product_copy
     
 
-def nutriments(product: dict, filter: list=default_nutriments) -> dict:
+def nutriments(product: dict) -> dict:
     return product['nutriments']
 
-# def nutriments_dataframe(product: dict) -> pd.DataFrame:
-#     nutrition_data = pd.DataFrame.from_dict(product['nutriments'])
-#     nutrition_data['unit'] pd.DataFrame.from_dict(product['nutriments'])
-#     return nutrition_data
+def nutriments_dataframe(product: dict) -> pd.DataFrame:
+    nutrition_data = pd.DataFrame.from_dict(product['nutriments'])
+    return nutrition_data
 
 def product(response, index: int = 0) -> dict:
     
@@ -48,12 +62,17 @@ def product(response, index: int = 0) -> dict:
 
 
 
-
 single_product = product(resp_code)
 single_product_keys = list(single_product.keys())
-nutriments = nutriments(single_product)
-product_filtered = filter_product(single_product, 'nutriments', default_nutriments)
+single_product_copy = single_product.copy()
+print(list(single_product_copy['nutriments'].keys()))
+
+single_product_copy_filtered = filter_product(single_product_copy, default_filters)
+nutriments_data = nutriments(single_product_copy)
+
+product_filtered = filter_product(single_product_copy, default_filters)
 product_filtered['nutriments']
+
 
 
 
