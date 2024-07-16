@@ -69,7 +69,18 @@ def get_recipes(ingredients, number=10, ranking=1, ignore_pantry=True):
                 print("-----------------------")
 
             print(recipe_dict)
-
+            streamlit_output = []
+            for recipe in processed_recipes:
+                recipe_data = {
+                    "name": recipe['RecipeName'],
+                    "image_url": recipe['ImageURL'],
+                    "ingredients": [
+                        f"{ingredient['Name']}: {ingredient['Amount']} {ingredient['Unit']} ({ingredient['Original']})"
+                        for ingredient in recipe['Ingredients']
+                    ]
+                }
+                streamlit_output.append(recipe_data)
+            return streamlit_output     
         else:
             print(f'Error in request. Status code: {response.status_code}')
             
@@ -79,5 +90,8 @@ def get_recipes(ingredients, number=10, ranking=1, ignore_pantry=True):
 
 ingredients_list = ['chicken', 'rice', 'broccoli']
 
-list = get_recipes(ingredients_list)
-print(list)
+if __name__ == '__main__':
+   print(get_recipes(ingredients_list))
+
+#list = get_recipes(ingredients_list)
+#print(list)
