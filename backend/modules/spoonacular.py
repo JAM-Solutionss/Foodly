@@ -1,5 +1,4 @@
 import requests
-import json
 import os
 from dotenv import load_dotenv
 load_dotenv()
@@ -25,14 +24,51 @@ def get_recipes(ingredients, number=10, ranking=1, ignore_pantry=True):
         if response.status_code == 200:
             recipes = response.json()
 
-            # Check if recipes.json already exists
-            file_path = 'recipes.json'
-            if not os.path.exists(file_path):
-                with open(file_path, 'w', encoding='utf-8') as f:
-                    json.dump(recipes, f, ensure_ascii=False, indent=4)
-                print(f'Created new file {file_path}')
-            else:
-                print(f'{file_path} already exists. Skipping creation.')
+            processed_recipes = []
+
+            for recipe in recipes:
+                recipe_name = recipe.get('title', 'No title available')
+                image_url = recipe.get('image', 'No image available')
+                
+                missed_ingredients = recipe.get('missedIngredients', [])
+                
+                sorted_missed_ingredients = sorted(missed_ingredients, key=lambda x: int(x['original'].split()[0]) if x['original'].split()[0].isdigit() else float('inf'))
+
+                recipe_dict = {
+                    'RecipeName': recipe_name,
+                    'ImageURL': image_url,
+                    'Ingredients': []
+                }
+
+                for ingredient in sorted_missed_ingredients:
+                    ingredient_name = ingredient.get('name', 'Unknown')
+                    ingredient_amount = ingredient.get('amount', 'Unknown')
+                    ingredient_unit = ingredient.get('unit', '')
+                    ingredient_original = ingredient.get('original', 'Unknown')
+
+                    ingredient_dict = {
+                        'Name': ingredient_name,
+                        'Amount': ingredient_amount,
+                        'Unit': ingredient_unit,
+                        'Original': ingredient_original
+                    }
+
+                    recipe_dict['Ingredients'].append(ingredient_dict)
+
+                processed_recipes.append(recipe_dict)
+
+            for recipe in processed_recipes:
+                print("Recipe:")
+                print(f"Recipe Name: {recipe['RecipeName']}")
+                print(f"Image URL: {recipe['ImageURL']}")
+                print("Ingredients:")
+                for ingredient in recipe['Ingredients']:
+                    print(f"Name: {ingredient['Name']}")
+                    print(f"Amount: {ingredient['Amount']} {ingredient['Unit']}")
+                    print(f"Original: {ingredient['Original']}")
+                print("-----------------------")
+
+            print(recipe_dict)
 
         else:
             print(f'Error in request. Status code: {response.status_code}')
@@ -43,4 +79,5 @@ def get_recipes(ingredients, number=10, ranking=1, ignore_pantry=True):
 
 ingredients_list = ['chicken', 'rice', 'broccoli']
 
-get_recipes(ingredients_list)
+list = get_recipes(ingredients_list)
+print(list)
