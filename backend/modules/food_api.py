@@ -23,6 +23,24 @@ def get_product_nutriscore(search_result):
         product_name = product.get('product_name', 'Unnamed product')
         print(f"Product: {product_name}, Nutri-Score: {nutri_score}")
 
+def get_product_nutrients(search_result):
+    # Extract Nutrition information
+    products = search_result['products']
+    for product in products:
+        product_name = product.get('product_name', 'Unnamed product')
+        nutrition_data = product.get('nutriments', {})
+    
+        print(f"Product: {product_name}")
+    
+        if nutrition_data:
+            for nutrient, value in nutrition_data.items():
+                print(f"  {nutrient}: {value}")
+        else:
+            print("  No nutrition information available")
+
+
+
 if __name__ == "__main__":
     product = search_product("pizza")
-    get_product_nutriscore(product)
+    #get_product_nutriscore(product)
+    get_product_nutrients(product)
