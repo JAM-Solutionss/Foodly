@@ -1,14 +1,15 @@
-from calendar import day_abbr
 import pandas as pd
 import openfoodfacts
 from product_filters import *
 
-def filter_product(product: dict, product_filters: list) -> dict:
-    """Filters product based on the provided "product_filters" dict.
+
+
+def filter_nutriments(product: dict, nutriments_filters: list) -> dict:
+    """Filters product nutriments based on the provided "nutriments_filters" list.
 
     Args:
         product (dict): Single producct dictionary.
-        product_filters (list): Dictionary of product data, that should be kept.
+        product_filters (list): List of product nutriments, that should be kept.
 
     Returns:
         dict: A new copy of the filtered product dictionary.
@@ -16,16 +17,15 @@ def filter_product(product: dict, product_filters: list) -> dict:
     product_copy = product.copy()
     data_filtered = {}
     
-    for data, filters in product_filters.items():
-    
-        for filter in filters:
-            for key, value in product[data].items():
-                if filter == key:
-                    data_filtered[key] = value
+    for filter in nutriments_filters:
+        for key, value in product['nutriments'].items():
+            if filter == key:
+                data_filtered[key] = value
                 
-        product_copy[data] = data_filtered
+        product_copy['nutriments'] = data_filtered
     
     return product_copy
+
  
 def product_data(product: dict, data_key: str) -> dict:
     """Extracts single data of the product like e.g. "nutriments" as dictionary.
@@ -39,20 +39,48 @@ def product_data(product: dict, data_key: str) -> dict:
     """
     return product[data_key]   
 
-def product_data_dataframe(product: dict, data_key: str) -> pd.DataFrame:
-    """Extracts single data of the product like e.g. "nutriments" as pandas DataFrame .
+
+def nutriments(product: dict) -> dict:
+    """Return nutriments data as dictionary.
 
     Args:
         product (dict): Single producct dictionary.
-        data_key (str): Key of data to extract.
 
     Returns:
-        pd.DataFrame: DataFrame of desired product data specified by "data_key".
+        dict: Dictionary if product nutriments.
     """
-    dataframe = pd.DataFrame()
-    for key, value in product[data_key].items():
-        dataframe[key] = [value]
-    return dataframe
+    return product_data(product, "nutriments")
+
+
+def nutriments_dataframe(product: dict) -> pd.DataFrame:
+    """Return nutriments data as datafrane.
+
+    Args:
+        product (dict): Single producct dictionary.
+
+    Returns:
+        pd.DataFrame: Dataframe if product nutriments.
+    """
+    nutriments_dict = nutriments(product)
+    nutriments_df = pd.DataFrame()
+    parameters = []
+    units= []
+    values = []
+    
+    for key, value in nutriments_dict.items():
+        if key.endswith('_unit'):
+            units.append(value)
+        else:
+            parameters.append(key)
+            values.append(value)
+            
+    nutriments_df = pd.DataFrame({
+        'Nutriment': parameters,
+        'Unit': units,
+        'Value': values
+    })
+    
+    return nutriments_df
 
 def product(response, index: int = 0) -> dict:
     """Extract a single product from the response specified by "index".
@@ -101,13 +129,13 @@ if __name__ == '__main__':
     print(single_product_copy_keys)
 
     # Filter product based an filters in product_filters
-    single_product_copy_filtered = filter_product(single_product_copy, default_filters)
+    single_product_copy_filtered = filter_nutriments(single_product_copy, nutriments_filters)
     
     # Getting nutriments as dictionary and DataFrame
-    nutriments = product_data(single_product_copy_filtered, 'nutriments')
-    nutriments_Dataframe = product_data_dataframe(single_product_copy_filtered, 'nutriments')
+    nutriments_dict = nutriments(single_product_copy_filtered)
+    nutriments_Dataframe = nutriments_dataframe(single_product_copy_filtered)
     
-    print(f'{nutriments}\n\n')
+    print(f'{nutriments_dict}\n\n')
     print(f'{nutriments_Dataframe}\n\n')
 
 
