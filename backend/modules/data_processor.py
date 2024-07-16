@@ -83,6 +83,20 @@ def nutriments_dataframe(product: dict) -> pd.DataFrame:
     
     return nutriments_df
 
+def nutriscore(product: dict) -> tuple[str,int]:
+    """Returns the nutriscore grade ('a' to 'e') and score (1 to 5) as tuple.
+
+    Args:
+        product (dict): Single producct dictionary.
+
+    Returns:
+        tuple[str,int]: Tuple of nutriscore grade ('a' to 'e') and score (1 to 5).
+    """
+    nutriscore_grade = product_data(product, "nutriscore_grade")
+    nutriscore_score = product_data(product, "nutriscore_score")
+    return nutriscore_grade, nutriscore_score
+
+
 def product(response, index: int = 0) -> dict:
     """Extract a single product from the response specified by "index".
     If the response contains only one product, the single product will be returned.
@@ -135,10 +149,13 @@ if __name__ == '__main__':
     # Getting nutriments as dictionary and DataFrame
     nutriments_dict = nutriments(single_product_copy_filtered)
     nutriments_Dataframe = nutriments_dataframe(single_product_copy_filtered)
-    
     print(f'{nutriments_dict}\n\n')
     print(f'{nutriments_Dataframe}\n\n')
-
+    
+    # Getting nutriscore grade and score
+    nutriscore_grade, nutriscore_score = nutriscore(single_product_copy_filtered)
+    
+    print(f'Nutriscore grade: {nutriscore_grade}\nNutriscore score: {nutriscore_score}')
 
 
 
