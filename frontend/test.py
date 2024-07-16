@@ -7,16 +7,32 @@ from backend.modules.llm import foodgpt
 from backend.main import FoodGPT
 import pandas as pd
 
-# Get the items from the food items list in FoodGPT 
-foodgpt_food_items = FoodGPT().food_items
-df = pd.DataFrame(foodgpt_food_items.items(), columns=["Item", "Amount"])
+# Pages
+home = st.Page(
+    "webpages/home.py",
+    title="Home",
+    icon=":material/home:"
+)
 
-st.title("FoodGPT")
+about = st.Page(
+    "webpages/about.py",
+    title="About",
+    icon=":material/info:"
+)
 
-if st.checkbox("Show Food Items"):
-    st.subheader("This is the list of food items from the FoodGPT model:")
-    st.write(df)
+food_data = st.Page(
+    "webpages/food_items.py",
+    title="Food Data",
+    icon=":material/database:"
+)
+
+# Navigation
+pg = st.navigation({"Home": [home], "About": [about], "Food Data": [food_data]})
+
+pg.run()
+
+
+
 
 # Get LLM Response
-prompt = f"Suche die besten Zutaten um ein leckeres Essen zu machen aus folgender Liste: {foodgpt_food_items.keys()}"
-st.write(foodgpt(prompt))
+
