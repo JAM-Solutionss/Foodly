@@ -93,16 +93,16 @@ def display_recipes():
         for index, recipe in enumerate(st.session_state.recipes):
             st.markdown(f"""
             <div class="recipe-tile">
-                <div class="recipe-name"><h3>{recipe['rname']}</h3></div>
-                <img src="{recipe['image_url']}" class="recipe-image">
+                <div class="recipe-name"><h3>{recipe['RecipeName']}</h3></div>
+                <img src="{recipe['ImageURL']}" class="recipe-image">
             </div>
             """, unsafe_allow_html=True)
             
-            with st.expander(f"View Details for {recipe['rname']}"):
+            with st.expander(f"View Details for {recipe['RecipeName']}"):
                 st.write("Ingredients:")
-                for ingredient in recipe['ingredients']:
-                    #ingredient_text = f"{ingredient['Name']}: {ingredient['Amount']} {ingredient['Unit']} ({ingredient['Original']})"
-                    st.write(f"- {ingredient}")
+                for ingredient in recipe['Ingredients']:
+                    ingredient_text = f"{ingredient['Name']}: {ingredient['Amount']} {ingredient['Unit']} ({ingredient['Original']})"
+                    st.write(f"- {ingredient_text}")
                 if st.button(f"Analyze Recipe {index + 1}", key=f"analyze_recipe_{index}"):
                     st.session_state.selected_recipe = recipe
                     st.switch_page("webpages/analysis.py")
