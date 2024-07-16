@@ -74,7 +74,7 @@ def get_recipes(ingredients, number=10, ranking=1, ignore_pantry=True):
             streamlit_output = []
             for recipe in processed_recipes:
                 recipe_data = {
-                    "name": recipe['RecipeName'],
+                    "rname": recipe['RecipeName'],
                     "image_url": recipe['ImageURL'],
                     "ingredients": [
                         f"{ingredient['Name']}: {ingredient['Amount']} {ingredient['Unit']} ({ingredient['Original']})"
@@ -82,6 +82,7 @@ def get_recipes(ingredients, number=10, ranking=1, ignore_pantry=True):
                     ]
                 }
                 streamlit_output.append(recipe_data)
+            print(streamlit_output)
             return streamlit_output
             
         else:
