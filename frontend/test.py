@@ -13,9 +13,9 @@ df = pd.DataFrame(foodgpt_food_items.items(), columns=["Item", "Amount"])
 
 st.title("FoodGPT")
 
-
-st.subheader("This is the list of food items from the FoodGPT model:")
-st.write(df)
+if st.checkbox("Show Food Items"):
+    st.subheader("This is the list of food items from the FoodGPT model:")
+    st.write(df)
 
 # Get LLM Response
 prompt = f"Suche die besten Zutaten um ein leckeres Essen zu machen aus folgender Liste: {foodgpt_food_items.keys()}"
