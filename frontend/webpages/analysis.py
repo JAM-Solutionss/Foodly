@@ -8,7 +8,7 @@ def show_analysis():
         recipe = st.session_state.selected_recipe
         st.subheader(f"Analysis for {recipe['RecipeName']}")
         
-        prompt = f"Analyze this recipe and provide cooking tips: {recipe['RecipeName']}. Ingredients: {', '.join(recipe['ingredients'])} and always answer in German!"
+        prompt = f"Analyze this recipe and provide cooking tips: {recipe['RecipeName']}. Ingredients: {', '.join(recipe['Ingredients'])} and always answer in German!"
         response = foodgpt(prompt)
         
         st.write(response)
