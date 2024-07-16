@@ -3,7 +3,7 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 
-def get_recipes(ingredients, number=10, ranking=1, ignore_pantry=True):
+def get_recipes(ingredients, ingredient_number=1, max_calories=800, min_protein=0, max_ready_time=1000, servings=2, number=10, ranking=1, ignore_pantry=True):
     ingredients_str = ','.join(ingredients)
     
     url = 'https://api.spoonacular.com/recipes/findByIngredients'
@@ -12,6 +12,11 @@ def get_recipes(ingredients, number=10, ranking=1, ignore_pantry=True):
     params = {
         'apiKey': api_key,
         'ingredients': ingredients_str,
+        'ingredientsNumber': ingredient_number,
+        'servings': servings,
+        'maxCalories': max_calories,
+        'minProtein': min_protein,
+        'maxReadTime': max_ready_time,
         'number': number,  # Number of recipes to retrieve
         'ranking': ranking,  # 1 = popularity, 2 = healthier
         'ignorePantry': ignore_pantry  # True = only our ingredients, False = allow other ingredients
@@ -57,15 +62,12 @@ def get_recipes(ingredients, number=10, ranking=1, ignore_pantry=True):
 
                 processed_recipes.append(recipe_dict)
 
-            for recipe in processed_recipes:
-                print("Recipe:")
+            for recipe in recipes:
                 print(f"Recipe Name: {recipe['RecipeName']}")
                 print(f"Image URL: {recipe['ImageURL']}")
                 print("Ingredients:")
                 for ingredient in recipe['Ingredients']:
-                    print(f"Name: {ingredient['Name']}")
-                    print(f"Amount: {ingredient['Amount']} {ingredient['Unit']}")
-                    print(f"Original: {ingredient['Original']}")
+                    print(f"  - {ingredient['Name']}: {ingredient['Amount']} {ingredient['Unit']}")
                 print("-----------------------")
 
             print(recipe_dict)
