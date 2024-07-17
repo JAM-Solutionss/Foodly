@@ -43,19 +43,26 @@ def search_product():
             st.session_state.clear_inputs = False
             display_data()
           
-            
+def color_nutrigrade(grade):
+    grade = grade.upper()
+    if grade in ['A', 'B', 'C']:
+        return f"<span style='color: green;'>{grade}</span>"
+    elif grade in ['D', 'E']:
+        return f"<span style='color: red;'>{grade}</span>"
+    else:
+        return "Unknown"      
         
 def display_data():
     # Display current nutrient data
     
     if st.session_state.single_product:
         st.subheader("Current Nutrient Data:")
-        col1, col2, col3 = st.columns([1.5, 0.5, 2])
+        col1, col2 = st.columns([1.5, 2])
         with col1:
-            st.subheader("Nutri Grade:")
+            grade = nutrigrade(st.session_state.single_product)
+            colored_grade = color_nutrigrade(grade)
+            st.markdown(f"### Nutrigrade: {colored_grade}", unsafe_allow_html=True)
         with col2:
-            st.subheader(nutrigrade(st.session_state.single_product))
-        with col3:
             st.subheader("Nutrients in 100g:")
             st.write(nutriments_dataframe(st.session_state.single_product))
     else:
