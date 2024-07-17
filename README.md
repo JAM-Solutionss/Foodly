@@ -29,9 +29,9 @@
 ## Contributors
 
 <p align="center">
-  - <a href="https://github.com/cipher-shad0w" target="_blank">Cipher Shadow</a> &#xa0; | &#xa0;
-  - <a href="https://github.com/arvedb" target="_blank">Arved Bahde</a> &#xa0; | &#xa0;
-  - <a href="https://github.com/mirixy" target="_blank">Miriam</a>
+  <a href="https://github.com/cipher-shad0w" target="_blank">Cipher Shadow</a> &#xa0; | &#xa0;
+  <a href="https://github.com/arvedb" target="_blank">Arved Bahde</a> &#xa0; | &#xa0;
+  <a href="https://github.com/mirixy" target="_blank">Miriam</a>
 </p>
 
 <br>
@@ -41,7 +41,7 @@
 Welcome to the Streamlit app that utilizes the [Open Food Facts Python SDK](https://github.com/openfoodfacts/openfoodfacts-python) to fetch and display food product data from [https://de.openfoodfacts.org/](https://de.openfoodfacts.org/). This project was created for a mini hackathon organized by Kevin Chromik.
 
 ![Demo Image](demo/Foodly_Demo_img.png)
-![Demo Video](demo/Foodly_Demo_video.mp4)
+![Demo Video](demo/Foodly_Demo_gif.gif)
 
 
 ## :sparkles: Features ##
