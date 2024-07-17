@@ -41,7 +41,7 @@
   <a href="#memo-license">License</a>
 </p>
 
-<p>
+<p align="center">
   <a href="https://github.com/cipher-shad0w" target="_blank">Cipher Shadow</a> &#xa0; | &#xa0;
   <a href="https://github.com/arvedb" target="_blank">Arved Bahde</a> &#xa0; | &#xa0;
   <a href="https://github.com/mirixy" target="_blank">Miriam</a>
