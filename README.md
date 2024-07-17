@@ -95,7 +95,7 @@ This project is licensed under the MIT License. See the LICENSE file for more de
 
 ## Acknowledgements
 
-Special thanks to Kevin Chromik for organizing the mini hackathon.
+Special thanks to <a href="https://github.com/kchromik" target="_blank">Kevin Chromik</a> for organizing the mini hackathon.
 
 ---
 
