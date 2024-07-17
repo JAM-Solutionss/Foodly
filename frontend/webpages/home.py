@@ -2,6 +2,7 @@ import streamlit as st
 import openfoodfacts
 from backend.modules.data_processor import product, filter_nutriments,  nutriments, nutriments_dataframe, nutrigrade, nutriscore, get_multiple_products
 from backend.modules.product_filters import nutriments_filters
+import time
 
 #Functions
 def get_product_nutriments(product: dict) -> dict:
@@ -69,11 +70,27 @@ def search_product():
 def perform_search():
     products = st.session_state.product_input
     if products:
+        progress_bar = st.progress(0)
+        progress_text = st.empty()
+        
+        progress_text.text("Searching for products...")
         resp_text = api.product.text_search(products)
+        progress_bar.progress(50)
+        
+        progress_text.text("Processing results...")
         multiple_products = get_multiple_products(resp_text)
+        progress_bar.progress(90)
+        
         st.session_state.products = multiple_products
         st.session_state.search_performed = True
         st.session_state.clear_inputs = False
+        
+        progress_bar.progress(100)
+        progress_text.text("Search complete!")
+        time.sleep(0.5)  # Brief pause to show completion
+        
+        progress_bar.empty()
+        progress_text.empty()
 
 def display_product_selection():
     if 'products' in st.session_state and st.session_state.products:
