@@ -26,22 +26,44 @@ def search_product():
         st.session_state.product_input = ''
         st.session_state.clear_inputs = False
 
-    col1, = st.columns([2])
+     # Custom CSS to align button and input heights
+    st.markdown("""
+        <style>
+        .stButton > button {
+            height: 3rem;
+            margin-top: 1.5rem;
+        }
+        .stTextInput > div > div > input {
+            height: 3rem;
+        }
+        </style>
+    """, unsafe_allow_html=True)
+
+    col1, col2 = st.columns([2,1])
     with col1:
-        products = st.text_input("Enter product name", key="product_input")
-    
-    
-    if st.button("Search"):
-        if products:
-            resp_text = api.product.text_search(products)
-            single_product = product(resp_text)
-            single_product_copy = single_product.copy()
-            single_product_copy_filtered = filter_nutriments(single_product_copy, nutriments_filters)
-            #print(resp_text)
-            st.session_state.single_product = single_product_copy_filtered
-            st.success(f"Found {st.session_state.single_product['product_name']}")
-            st.session_state.clear_inputs = False
-            display_data()
+        products = st.text_input("Enter product name", key="product_input", on_change=perform_search)
+    with col2:
+        if st.button("Search"):
+            perform_search()
+        # Create a placeholder for search results
+    results_placeholder = st.empty()
+    with results_placeholder:
+                display_data()
+
+
+def perform_search():
+    products = st.session_state.product_input
+    if products:
+        resp_text = api.product.text_search(products)
+        single_product = product(resp_text)
+        single_product_copy = single_product.copy()
+        single_product_copy_filtered = filter_nutriments(single_product_copy, nutriments_filters)
+        st.session_state.single_product = single_product_copy_filtered
+        st.success(f"Found {st.session_state.single_product['product_name']}")
+        st.session_state.clear_inputs = False
+        
+
+        
           
 def color_nutrigrade(grade):
     grade = grade.upper()
