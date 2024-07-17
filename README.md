@@ -5,7 +5,7 @@ Welcome to the Streamlit app that utilizes the [Open Food Facts Python SDK](http
 
 ## Demo
 
-[![](https://vimeo.com/985836404)](https://vimeo.com/985836404)
+[Demo Video](https://vimeo.com/985836404)
 
 ## Contributors
 
