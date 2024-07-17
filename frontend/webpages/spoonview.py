@@ -18,28 +18,27 @@ def add_ingredient():
 
     if st.session_state.clear_inputs:
         st.session_state.ingredient_input = ''
-        st.session_state.amount_input = 0
         st.session_state.clear_inputs = False
 
-    col1, col2 = st.columns([2, 1])
+    col1 = st.columns(1)[0]
     with col1:
         ingredient = st.text_input("Enter ingredient name", key="ingredient_input")
-    with col2:
-        amount = st.number_input("Enter amount", min_value=0, step=1, key="amount_input")
+        
+    
     
     if st.button("Add Ingredient"):
-        if ingredient and amount > 0:
-            st.session_state.food_storage.add_food_item(ingredient, amount)
-            st.success(f"Added {amount} of {ingredient}")
+        if ingredient:
+            st.session_state.food_storage.add_food_item(ingredient)
+            st.success(f"Added {ingredient}")
             st.session_state.clear_inputs = True
             st.experimental_rerun()
         else:
-            st.error("Please enter a valid ingredient and amount")
+            st.error("Please enter a valid ingredient")
 
     # Display current storage
-    st.write("Current Storage:")
-    for item, quantity in st.session_state.food_storage.get_all_items().items():
-        st.write(f"{item}: {quantity}")
+    st.write("Current Items:")
+    for item in st.session_state.food_storage.get_all_items().items():
+        st.write(f"{item}")
 add_ingredient()
 
 
@@ -52,7 +51,7 @@ if 'selected_recipe' not in st.session_state:
 
 def get_recipes_from_backend():
     ingredients = []
-    for item, quantity in st.session_state.food_storage.get_all_items().items():
+    for id, item in st.session_state.food_storage.get_all_items().items():
         ingredients.append(item)
     print(ingredients)
     
@@ -77,7 +76,7 @@ def display_recipes():
         }
         .recipe-name {
             padding: 0.5rem;
-            background-color: #ffd8fb;
+            background-color: #18DE3D;
         }
         .recipe-image {
             width: 100%;

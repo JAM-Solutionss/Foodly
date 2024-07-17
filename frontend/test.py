@@ -20,11 +20,6 @@ about = st.Page(
     icon=":material/info:"
 )
 
-food_data = st.Page(
-    "webpages/food_items.py",
-    title="Food Data",
-    icon=":material/database:"
-)
 
 analysis = st.Page(
     "webpages/analysis.py",
@@ -32,8 +27,14 @@ analysis = st.Page(
     icon=":material/database:"
 )
 
+find_recipe = st.Page(
+    "webpages/spoonview.py",
+    title="Find Recipe",
+    icon=":material/search:"
+)
+
 # Navigation
-pg = st.navigation({"Menu": [home, about, food_data], "Analysis": [analysis]})
+pg = st.navigation({"Menu": [home, about, find_recipe], "Analysis": [analysis]})
 
 pg.run()
 

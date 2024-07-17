@@ -45,8 +45,10 @@ def search_product():
           
 def color_nutrigrade(grade):
     grade = grade.upper()
-    if grade in ['A', 'B', 'C']:
+    if grade in ['A', 'B']:
         return f"<span style='color: green;'>{grade}</span>"
+    elif grade in ['C']:
+        return f"<span style='color: yellow;'>{grade}</span>"
     elif grade in ['D', 'E']:
         return f"<span style='color: red;'>{grade}</span>"
     else:
