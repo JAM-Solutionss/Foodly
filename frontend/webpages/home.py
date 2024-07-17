@@ -3,7 +3,7 @@ import openfoodfacts
 import os
 import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from backend.modules.data_processor import product
+from foodly.backend.modules.data_processor import product
 from backend.modules.dataprocessor import filter_nutriments,  nutriments, nutriments_dataframe, nutrigrade, nutriscore, get_multiple_products
 from backend.modules import nutriments_filters
 import time
