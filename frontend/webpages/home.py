@@ -25,11 +25,42 @@ def search_product():
         st.session_state.product_input = ''
         st.session_state.clear_inputs = False
 
-    col1, col2 = st.columns([2,1])
+    # Custom CSS to align button and input heights
+    st.markdown("""
+        <style>
+        .stButton > button {
+            height: 3rem;
+            width: 100%;
+            
+            
+        }
+        .stTextInput > div > div > input {
+            height: 2rem;
+            line-height: 2rem;
+            padding-top: 0;
+            padding-bottom: 0;
+            font-size: 1.5rem;
+            
+        }
+        .stSelectbox > div > div > div > div > div > div > input {
+            height: 2rem;
+            line-height: 2rem;
+            padding-top: 0;
+            padding-bottom: 0;
+            font-size: 1.5rem;
+        }
+        </style>
+    """, unsafe_allow_html=True)
+    
+    
+    c = st.container()
+    col1, col2 = st.columns([2,1], vertical_alignment="bottom")
+    
+    
     with col1:
-        products = st.text_input("Enter product name", key="product_input")
+        products = c.text_input("Enter product name", key="product_input", on_change=perform_search)
     with col2:
-        if st.button("Search"):
+        if c.button("Search"):
             perform_search()
 
     if 'search_performed' in st.session_state and st.session_state.search_performed:

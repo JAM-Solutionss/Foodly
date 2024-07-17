@@ -124,7 +124,7 @@ def product(response, index: int = 0) -> dict:
         return response
 
 
-def get_multiple_products(response, limit=10):
+def get_multiple_products(response, limit=20):
     """Extract product name and barcode from multiple products in the response."""
     if 'count' in response.keys():
         products = response['products'][:limit]
