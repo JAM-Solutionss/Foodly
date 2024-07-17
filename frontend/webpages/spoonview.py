@@ -1,5 +1,5 @@
 import streamlit as st
-from backend import get_recipes
+from backend.modules.spoonacular import get_recipes
 
 from backend.modules.food_storage import FoodStorage
 
