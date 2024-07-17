@@ -3,8 +3,6 @@ import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 import streamlit as st
-from backend import *
-import pandas as pd
 
 # Pages
 home = st.Page(
