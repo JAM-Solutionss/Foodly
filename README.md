@@ -1,32 +1,66 @@
+<div align="center" id="top"> 
+  <img src="./.github/app.gif" alt="Foodly" />
 
-# Foodly
+  &#xa0;
 
-Welcome to the Streamlit app that utilizes the [Open Food Facts Python SDK](https://github.com/openfoodfacts/openfoodfacts-python) to fetch and display food product data from [https://de.openfoodfacts.org/](https://de.openfoodfacts.org/). This project was created for a mini hackathon organized by Kevin Chromik.
+  <!-- <a href="https://foodly.streamlit.app">Demo</a> -->
+</div>
 
-## Demo
+<h1 align="center">Foodly</h1>
 
-[Demo Video](https://vimeo.com/985836404)
+<p align="center">
+  <img alt="Github top language" src="https://img.shields.io/github/languages/top/cipher-shad0w/foodly?color=56BEB8">
 
-![Demo Image](demo/Foodly_Demo2.png)
+  <img alt="Github language count" src="https://img.shields.io/github/languages/count/cipher-shad0w/foodly?color=56BEB8">
+
+  <img alt="Repository size" src="https://img.shields.io/github/repo-size/cipher-shad0w/foodly?color=56BEB8">
+</p>
+
+
+<p align="center">
+  <a href="#dart-about">About</a> &#xa0; | &#xa0; 
+  <a href="#sparkles-features">Features</a> &#xa0; | &#xa0;
+  <a href="#rocket-technologies">Technologies</a> &#xa0; | &#xa0;
+  <a href="#white_check_mark-requirements">Requirements</a> &#xa0; | &#xa0;
+  <a href="#checkered_flag-starting">Starting</a> &#xa0; | &#xa0;
+  <a href="#memo-license">License</a>
+</p>
 
 ## Contributors
 
-- [mirixy](https://github.com/mirixy)
-- [cipher-shad0w](https://github.com/cipher-shad0w)
-- [arvedb](https://github.com/arvedb)
+<p align="center">
+  - <a href="https://github.com/cipher-shad0w" target="_blank">Cipher Shadow</a> &#xa0; | &#xa0;
+  - <a href="https://github.com/arvedb" target="_blank">Arved Bahde</a> &#xa0; | &#xa0;
+  - <a href="https://github.com/mirixy" target="_blank">Miriam</a>
+</p>
 
-## Features
+<br>
 
-- User-friendly interface to search for food products.
-- Search for food products by text.
-- Fetches nutriscore and nutriments data. 
-- Displays results in a structured and easy-to-read format.
+## :dart: About ##
+
+Welcome to the Streamlit app that utilizes the [Open Food Facts Python SDK](https://github.com/openfoodfacts/openfoodfacts-python) to fetch and display food product data from [https://de.openfoodfacts.org/](https://de.openfoodfacts.org/). This project was created for a mini hackathon organized by Kevin Chromik.
+
+![Demo Image](demo/Foodly_Demo_img.png)
+![Demo Video](demo/Foodly_Demo_video.mp4)
+
+
+## :sparkles: Features ##
+
+:heavy_check_mark: User-friendly interface to search for food products.
+:heavy_check_mark: Search for food products by text.
+:heavy_check_mark: Fetches nutriscore and nutriments data. 
+:heavy_check_mark: Displays results in a structured and easy-to-read format.
+
+## :white_check_mark: Requirements ##
+
+Before starting :checkered_flag:, you need to have [Git](https://git-scm.com) installed.
+
 
 ## Installation
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/your-username/your-repo.git
+   git clone https://github.com/cipher-shad0w/Foodly.git
    cd your-repo
    ```
 
@@ -68,3 +102,13 @@ Special thanks to Kevin Chromik for organizing the mini hackathon.
 If you have any questions or need further assistance, please feel free to contact any of the contributors.
 
 Happy coding!
+
+
+Made with :heart: by:
+<a href="https://github.com/cipher-shad0w" target="_blank">Cipher Shadow</a> &#xa0; | &#xa0;
+<a href="https://github.com/arvedb" target="_blank">Arved Bahde</a> &#xa0; | &#xa0;
+<a href="https://github.com/mirixy" target="_blank">Miriam</a> 
+
+&#xa0;
+
+<a href="#top">Back to top</a>
