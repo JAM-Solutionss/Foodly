@@ -17,7 +17,7 @@ Welcome to the Streamlit app that utilizes the [Open Food Facts Python SDK](http
 
 - User-friendly interface to search for food products.
 - Search for food products by text.
-- Fetches nutriscore and nutriments data.
+- Fetches nutriscore and nutriments data. 
 - Displays results in a structured and easy-to-read format.
 
 ## Installation
