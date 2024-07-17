@@ -1,10 +1,7 @@
 import streamlit as st
 import openfoodfacts
-import os
-import sys
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from backend import product, filter_nutriments,  nutriments, nutriments_dataframe, nutrigrade, nutriscore, get_multiple_products
-from backend import nutriments_filters
+from backend.modules.data_processor import product, filter_nutriments,  nutriments, nutriments_dataframe, nutrigrade, nutriscore, get_multiple_products
+from backend.modules.product_filters import nutriments_filters
 import time
 
 #Functions

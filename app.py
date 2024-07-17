@@ -1,31 +1,27 @@
-import os
-import sys
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-
 import streamlit as st
 
 # Pages
 home = st.Page(
-    "webpages/home.py",
+    "frontend/webpages/home.py",
     title="Home",
     icon=":material/home:"
 )
 
 about = st.Page(
-    "webpages/about.py",
+    "frontend/webpages/about.py",
     title="About",
     icon=":material/info:"
 )
 
 
 analysis = st.Page(
-    "webpages/analysis.py",
+    "frontend/webpages/analysis.py",
     title="Recipe Analysis",
     icon=":material/database:"
 )
 
 find_recipe = st.Page(
-    "webpages/spoonview.py",
+    "frontend/webpages/spoonview.py",
     title="Find Recipe",
     icon=":material/search:"
 )

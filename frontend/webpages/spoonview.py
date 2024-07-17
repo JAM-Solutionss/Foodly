@@ -1,11 +1,7 @@
 import streamlit as st
-import sys
-import os
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from backend import foodgpt
-from backend import get_recipes
-from backend import FoodGPT
-from backend import FoodStorage
+from backend.modules.spoonacular import get_recipes
+
+from backend.modules.food_storage import FoodStorage
 
 st.title("FoodGPT")
 if 'food_storage' not in st.session_state:
