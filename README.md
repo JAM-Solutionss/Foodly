@@ -5,7 +5,7 @@ Welcome to the Streamlit app that utilizes the [Open Food Facts Python SDK](http
 
 ## Demo
 
-![Foodly Demo](demo/Foodly_Demo.mp4)
+<iframe src="https://player.vimeo.com/video/985836404?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Foodly Demo"></iframe>
 
 ## Contributors
 
@@ -38,7 +38,7 @@ Welcome to the Streamlit app that utilizes the [Open Food Facts Python SDK](http
 1. **Run the Streamlit app:**
    ```bash
    cd frontend
-   streamlit run test.py
+   streamlit run app.py
    ```
 
 3. **Enter the name of a food product in the text input field and submit to get a list of found products details. Click the desired product to get nutriscore and nutriments data.**
@@ -52,17 +52,6 @@ Welcome to the Streamlit app that utilizes the [Open Food Facts Python SDK](http
 
 - [Streamlit](https://streamlit.io/): Framework for creating interactive web applications.
 - [Open Food Facts Python SDK](https://github.com/openfoodfacts/openfoodfacts-python): Python library for interacting with the Open Food Facts database.
-
-## Contributing
-
-We welcome contributions to enhance this project. If you have any ideas, suggestions, or bug fixes, please open an issue or submit a pull request.
-
-1. Fork the repository.
-2. Create a new branch (`git checkout -b feature-branch`).
-3. Make your changes.
-4. Commit your changes (`git commit -m 'Add new feature'`).
-5. Push to the branch (`git push origin feature-branch`).
-6. Open a pull request.
 
 ## License
 
