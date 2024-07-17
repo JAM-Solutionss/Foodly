@@ -5,7 +5,7 @@ Welcome to the Streamlit app that utilizes the [Open Food Facts Python SDK](http
 
 ## Demo
 
-![Demo Video](demo/Foodly_Demo.mp4)
+[Demo Video](https://vimeo.com/985836404)
 
 ![Demo Image](demo/Foodly_Demo2.png)
 
