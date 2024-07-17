@@ -12,7 +12,7 @@ def filter_nutriments(product: dict, nutriments_filters: list) -> dict:
     Returns:
         dict: A new copy of the filtered product dictionary.
     """
-    product_copy = product.copy()c
+    product_copy = product.copy()
     data_filtered = {}
     
     for filter in nutriments_filters:
