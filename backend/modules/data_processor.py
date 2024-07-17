@@ -1,6 +1,6 @@
 import pandas as pd
 import openfoodfacts
-from product_filters import *
+from .product_filters import nutriments_filters
 
 def filter_nutriments(product: dict, nutriments_filters: list) -> dict:
     """Filters product nutriments based on the provided "nutriments_filters" list.

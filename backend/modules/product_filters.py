@@ -6,6 +6,8 @@ nutriments_filters = [
     'fat_100g',
     'fat_unit',
     'sugars_100g',
-    'sugars_unit'        
+    'sugars_unit',
+    'proteins_100g',
+    'proteins_unit'        
 ]
 
