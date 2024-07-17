@@ -1,5 +1,8 @@
 import streamlit as st
-from backend.modules.llm import foodgpt
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from backend import foodgpt
 
 def show_analysis():
     st.title("Recipe Analysis")

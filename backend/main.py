@@ -1,4 +1,4 @@
-from backend.modules.llm import foodgpt
+from .modules import foodgpt
 
 
 class FoodGPT:
