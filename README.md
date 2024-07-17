@@ -1,94 +1,68 @@
-<div align="center" id="top"> 
-  <img src="./.github/app.gif" alt="Foodly" />
 
-  &#xa0;
+# Foodly
 
-  <!-- <a href="https://foodly.streamlit.app">Demo</a> -->
-</div>
+Welcome to the Streamlit app that utilizes the [Open Food Facts Python SDK](https://github.com/openfoodfacts/openfoodfacts-python) to fetch and display food product data from [https://de.openfoodfacts.org/](https://de.openfoodfacts.org/). This project was created for a mini hackathon organized by Kevin Chromik.
 
-<h1 align="center">Foodly</h1>
+## Demo
 
-<p align="center">
-  <img alt="Github top language" src="https://img.shields.io/github/languages/top/cipher-shad0w/foodly?color=56BEB8">
+[Demo Video](https://vimeo.com/985836404)
 
-  <img alt="Github language count" src="https://img.shields.io/github/languages/count/cipher-shad0w/foodly?color=56BEB8">
+## Contributors
 
-  <img alt="Repository size" src="https://img.shields.io/github/repo-size/cipher-shad0w/foodly?color=56BEB8">
-</p>
+- [mirixy](https://github.com/mirixy)
+- [cipher-shad0w](https://github.com/cipher-shad0w)
+- [arvedb](https://github.com/arvedb)
 
-<!-- Status -->
+## Features
 
-<!-- <h4 align="center"> 
-	🚧  Foodly 🚀 Under construction...  🚧
-</h4> 
+- User-friendly interface to search for food products.
+- Search for food products by text.
+- Fetches nutriscore and nutriments data. 
+- Displays results in a structured and easy-to-read format.
 
-<hr> -->
+## Installation
 
-<p align="center">
-  <a href="#dart-about">About</a> &#xa0; | &#xa0; 
-  <a href="#sparkles-features">Features</a> &#xa0; | &#xa0;
-  <a href="#rocket-technologies">Technologies</a> &#xa0; | &#xa0;
-  <a href="#white_check_mark-requirements">Requirements</a> &#xa0; | &#xa0;
-  <a href="#checkered_flag-starting">Starting</a> &#xa0; | &#xa0;
-  <a href="#memo-license">License</a>
-</p>
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/your-username/your-repo.git
+   cd your-repo
+   ```
 
-<p align="center">
-  <a href="https://github.com/cipher-shad0w" target="_blank">Cipher Shadow</a> &#xa0; | &#xa0;
-  <a href="https://github.com/arvedb" target="_blank">Arved Bahde</a> &#xa0; | &#xa0;
-  <a href="https://github.com/mirixy" target="_blank">Miriam</a>
-</p>
+2. **Install dependencies:**
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-<br>
+## Usage
 
-## :dart: About ##
+1. **Run the Streamlit app:**
+   ```bash
+   cd frontend
+   streamlit run app.py
+   ```
 
-Describe your project
+3. **Enter the name of a food product in the text input field and submit to get a list of found products details. Click the desired product to get nutriscore and nutriments data.**
 
-## :sparkles: Features ##
+## Project Structure
 
-:heavy_check_mark: Feature 1;\
-:heavy_check_mark: Feature 2;\
-:heavy_check_mark: Feature 3;
+- `test.py`: Main file to run the Streamlit app.
+- `requirements.txt`: List of Python dependencies.
 
-## :rocket: Technologies ##
+## Technologies Used
 
-The following tools were used in this project:
+- [Streamlit](https://streamlit.io/): Framework for creating interactive web applications.
+- [Open Food Facts Python SDK](https://github.com/openfoodfacts/openfoodfacts-python): Python library for interacting with the Open Food Facts database.
 
-- [Expo](https://expo.io/)
-- [Node.js](https://nodejs.org/en/)
-- [React](https://pt-br.reactjs.org/)
-- [React Native](https://reactnative.dev/)
-- [TypeScript](https://www.typescriptlang.org/)
+## License
 
-## :white_check_mark: Requirements ##
+This project is licensed under the MIT License. See the LICENSE file for more details.
 
-Before starting :checkered_flag:, you need to have [Git](https://git-scm.com) installed.
+## Acknowledgements
 
-## :checkered_flag: Starting ##
+Special thanks to Kevin Chromik for organizing the mini hackathon.
 
-```bash
-# Clone this project
-$ git clone https://github.com/cipher-shad0w/foodly
+---
 
-# Access
-$ cd foodly
+If you have any questions or need further assistance, please feel free to contact any of the contributors.
 
-# Install dependencies
-$ yarn
-
-# Run the project
-$ yarn start
-
-# The server will initialize in the <http://localhost:3000>
-```
-
-
-Made with :heart: by:
-<a href="https://github.com/cipher-shad0w" target="_blank">Cipher Shadow</a> &#xa0; | &#xa0;
-<a href="https://github.com/arvedb" target="_blank">Arved Bahde</a> &#xa0; | &#xa0;
-<a href="https://github.com/mirixy" target="_blank">Miriam</a> 
-
-&#xa0;
-
-<a href="#top">Back to top</a>
+Happy coding!
