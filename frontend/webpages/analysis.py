@@ -1,5 +1,5 @@
 import streamlit as st
-from backend.modules.llm import foodgpt
+from backend import foodgpt
 
 def show_analysis():
     st.title("Recipe Analysis")

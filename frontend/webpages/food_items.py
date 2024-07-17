@@ -3,8 +3,8 @@ import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 import streamlit as st
-from backend.modules.llm import foodgpt
-from backend.main import FoodGPT
+from backend import foodgpt
+from backend import FoodGPT
 import pandas as pd
 
 
