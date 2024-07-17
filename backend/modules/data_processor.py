@@ -124,7 +124,13 @@ def product(response, index: int = 0) -> dict:
         return response
 
 
-
+def get_multiple_products(response, limit=10):
+    """Extract product name and barcode from multiple products in the response."""
+    if 'count' in response.keys():
+        products = response['products'][:limit]
+        return [{'product_name': p.get('product_name', 'Unknown'), 'code': p.get('code', 'No barcode'), 'nutriments': p.get('nutriments', 'No Nutriments'), 'nutriments': p.get('nutriscore_grade', 'No Nutriscore')} for p in products]
+    else:
+        return [{'product_name': response.get('product_name', 'Unknown'), 'code': response.get('code', 'No barcode')}]
 
 
 if __name__ == '__main__':

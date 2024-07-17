@@ -1,6 +1,6 @@
 import streamlit as st
 import openfoodfacts
-from backend.modules.data_processor import product, filter_nutriments,  nutriments, nutriments_dataframe, nutrigrade, nutriscore
+from backend.modules.data_processor import product, filter_nutriments,  nutriments, nutriments_dataframe, nutrigrade, nutriscore, get_multiple_products
 from backend.modules.product_filters import nutriments_filters
 
 #Functions
@@ -18,7 +18,6 @@ api = openfoodfacts.API(user_agent="MyAwesomeApp/1.0", timeout=100)
     
 
 def search_product():
-    
     if 'clear_inputs' not in st.session_state:
         st.session_state.clear_inputs = False
 
@@ -26,42 +25,48 @@ def search_product():
         st.session_state.product_input = ''
         st.session_state.clear_inputs = False
 
-     # Custom CSS to align button and input heights
-    st.markdown("""
-        <style>
-        .stButton > button {
-            height: 3rem;
-            margin-top: 1.5rem;
-        }
-        .stTextInput > div > div > input {
-            height: 3rem;
-        }
-        </style>
-    """, unsafe_allow_html=True)
-
     col1, col2 = st.columns([2,1])
     with col1:
-        products = st.text_input("Enter product name", key="product_input", on_change=perform_search)
+        products = st.text_input("Enter product name", key="product_input")
     with col2:
         if st.button("Search"):
             perform_search()
-        # Create a placeholder for search results
-    results_placeholder = st.empty()
-    with results_placeholder:
-                display_data()
 
+    if 'search_performed' in st.session_state and st.session_state.search_performed:
+        display_product_selection()
 
 def perform_search():
     products = st.session_state.product_input
     if products:
         resp_text = api.product.text_search(products)
-        single_product = product(resp_text)
-        single_product_copy = single_product.copy()
-        single_product_copy_filtered = filter_nutriments(single_product_copy, nutriments_filters)
-        st.session_state.single_product = single_product_copy_filtered
-        st.success(f"Found {st.session_state.single_product['product_name']}")
+        multiple_products = get_multiple_products(resp_text)
+        st.session_state.products = multiple_products
+        st.session_state.search_performed = True
         st.session_state.clear_inputs = False
+
+def display_product_selection():
+    if 'products' in st.session_state and st.session_state.products:
+        product_options = [f"{p['product_name']} (Barcode: {p['code']})" for p in st.session_state.products]
+        selected_product = st.selectbox("Select a product", product_options)
         
+        if selected_product:
+            display_product_details(selected_product)
+
+def display_product_details(selected_product):
+    barcode = selected_product.split("(Barcode: ")[1].strip(")")
+    resp_code = api.product.get(barcode)
+    single_product = product(resp_code)
+    single_product_copy_filtered = filter_nutriments(single_product, nutriments_filters)
+    
+    st.subheader("Current Nutrient Data:")
+    col1, col2 = st.columns([1.5, 2])
+    with col1:
+        grade = nutrigrade(single_product_copy_filtered)
+        colored_grade = color_nutrigrade(grade)
+        st.markdown(f"### Nutrigrade: {colored_grade}", unsafe_allow_html=True)
+    with col2:
+        st.subheader("Nutrients in 100g:")
+        st.write(nutriments_dataframe(single_product_copy_filtered))
 
         
           
@@ -75,22 +80,35 @@ def color_nutrigrade(grade):
         return f"<span style='color: red;'>{grade}</span>"
     else:
         return "Unknown"      
-        
+
+
 def display_data():
-    # Display current nutrient data
-    
-    if st.session_state.single_product:
-        st.subheader("Current Nutrient Data:")
-        col1, col2 = st.columns([1.5, 2])
-        with col1:
-            grade = nutrigrade(st.session_state.single_product)
-            colored_grade = color_nutrigrade(grade)
-            st.markdown(f"### Nutrigrade: {colored_grade}", unsafe_allow_html=True)
-        with col2:
-            st.subheader("Nutrients in 100g:")
-            st.write(nutriments_dataframe(st.session_state.single_product))
+    if 'products' in st.session_state and st.session_state.products:
+        product_options = [f"{p['product_name']} (Barcode: {p['code']})" for p in st.session_state.products]
+        selected_product = st.selectbox("Select a product", product_options)
+        
+        if selected_product:
+            barcode = selected_product.split("(Barcode: ")[1].strip(")")
+            resp_code = api.product.get(barcode)
+            single_product = product(resp_code)
+            single_product_copy_filtered = filter_nutriments(single_product, nutriments_filters)
+            
+            st.subheader("Current Nutrient Data:")
+            col1, col2 = st.columns([1.5, 2])
+            with col1:
+                grade = nutrigrade(single_product_copy_filtered)
+                colored_grade = color_nutrigrade(grade)
+                st.markdown(f"### Nutrigrade: {colored_grade}", unsafe_allow_html=True)
+            with col2:
+                st.subheader("Nutrients in 100g:")
+                st.write(nutriments_dataframe(single_product_copy_filtered))
     else:
-        st.write("No product found")
+        st.write("No products found")
+
+
+
+
+
     
     
        
