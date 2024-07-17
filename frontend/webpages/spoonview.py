@@ -103,7 +103,7 @@ def display_recipes():
                     st.write(f"- {ingredient_text}")
                 if st.button(f"Analyze Recipe {index + 1}", key=f"analyze_recipe_{index}"):
                     st.session_state.selected_recipe = recipe
-                    st.switch_page("webpages/analysis.py")
+                    st.switch_page("frontend/webpages/analysis.py")
 
         st.markdown('</div>', unsafe_allow_html=True)
 
