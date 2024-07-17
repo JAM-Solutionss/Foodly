@@ -1,8 +1,8 @@
 import os
-
 from groq import Groq
-from dotenv import load_dotenv, dotenv_values
-load_dotenv()
+import streamlit as st
+
+os.environ["GROQ_API_KEY"] == st.secrets['GROQ_API_KEY']
 
 
 # Initialize Client

@@ -1,13 +1,14 @@
 import requests
 import os
-from dotenv import load_dotenv
-load_dotenv()
+import streamlit as st
+
+os.environ["SPOONACULAR_API_KEY"] = st.secrets['SPOONACULAR_API_KEY']
 
 def get_recipes(ingredients, ingredient_number=1, max_calories=800, min_protein=0, max_ready_time=1000, servings=2, number=10, ranking=1, ignore_pantry=True):
     ingredients_str = ','.join(ingredients) # combines all ingredients into one string
   
     url = 'https://api.spoonacular.com/recipes/findByIngredients'
-    api_key = os.getenv('SPOONACULAR_API_KEY')
+    api_key = os.environ.get('SPOONACULAR_API_KEY')
 
     params = {
         'apiKey': api_key,
