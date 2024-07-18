@@ -27,7 +27,7 @@ find_recipe = st.Page(
 )
 
 # Navigation
-pg = st.navigation({"Menu": [home, about]})
+pg = st.navigation({"Menu": [home, find_recipe, about], "Analysis": [analysis]})
 
 pg.run()
 
